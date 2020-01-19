@@ -6,7 +6,7 @@ import os
 import requests
 from collections import OrderedDict 
 
-def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True ):
+def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True, wiki_scanner='https://petscan.wmflabs.org/' ):
   """
   we'll use another api called catscan2 to grab a list of pages in
   categories and subcategories. it works like all the other apis we've
@@ -33,7 +33,9 @@ def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True 
   else:
     combination = "union"
   
-  url_catscan = "http://tools.wmflabs.org/catscan2/catscan2.php"
+  #url_catscan = "http://tools.wmflabs.org/catscan2/catscan2.php"
+  #url_catscan = "https://petscan.wmflabs.org/"
+  url_catsan = wiki_scanner
 
   parameters = {'language' : 'en',
                 'project' : 'wikipedia',
