@@ -47,7 +47,14 @@ def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True,
 
   r = requests.get(url_catscan, params=parameters)
   articles_json = r.json() ### get the result into a handy format
-  articles = articles_json["*"][0]['a']["*"]  #### work the result down more to the meat: the retrieved articles as a list
-  article_titles = [ article["title"].replace("_", " ") for article in articles  ] 
+  
+  if not 'error' in articles_json:
+    articles = articles_json["*"][0]['a']["*"]  #### work the result down more to the meat: the retrieved articles as a list
+    article_titles = [ article["title"].replace("_", " ") for article in articles  ] 
+  else:
+    article_titles = []
+    print("ERROR: This may be a large query running at the same time as other people, or something else is going wrong. Try again later.")
+    print( articles_json )
+  
   return( article_titles )
 
