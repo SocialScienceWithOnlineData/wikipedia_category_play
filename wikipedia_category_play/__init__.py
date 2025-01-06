@@ -6,7 +6,7 @@ import os
 import requests
 from collections import OrderedDict 
 
-def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True, wiki_scanner='https://petscan.wmflabs.org/' ):
+def getWikipediaTitlesByCategory( categories, depth = 10, intersect=True, wiki_scanner='https://petscan.wmflabs.org/' ):
   """
   we'll use another api called catscan2 to grab a list of pages in
   categories and subcategories. it works like all the other apis we've
@@ -22,11 +22,7 @@ def getWikipediaTitlesByCategory( categories, downstream = True, intersect=True,
   #  if it gets one, it turns it into a list
   if type(categories) == list:
     categories = "\n".join(categories)
-  
-  if downstream:
-    depth = 10
-  else: 
-    depth = 0
+
   
   if intersect:
     combination = "subset"
